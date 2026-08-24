@@ -500,6 +500,46 @@ img {
     font-size: 16px;
 }
 
+.creator-credit {
+    width: fit-content;
+
+    margin-top: 28px;
+
+    padding-top: 16px;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.10);
+}
+
+.creator-credit span,
+.creator-credit strong {
+    display: block;
+}
+
+.creator-credit span {
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+.creator-credit strong {
+    margin-top: 5px;
+
+    color: var(--gold-light);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size: 13px;
+
+    letter-spacing: 0.4px;
+}
+
 .title-hero {
     position: relative;
 
