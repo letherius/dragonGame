@@ -2,29 +2,948 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
-    <title>RPG - Dragon Repeller</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Dragon Repeller: Emberfall is a browser-based fantasy RPG built with HTML, CSS, and JavaScript."
+    >
+
+    <meta
+        name="theme-color"
+        content="#090b18"
+    >
+
+    <title>Dragon Repeller: Emberfall</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="styles.css?v=4.0.0"
+    >
 </head>
+
 <body>
-    <div id="game">
-      <div id="stats">
-        <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
-        <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
-        <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
-      </div>
-      <div id="controls"></div>
-        <button id="button1">Go to store</button>
-        <button id="button2">Go to cave</button>
-        <button id="button3">Fight dragon</button>
-      <div id="monsterStats">
-        <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
-        <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
-      </div>
-      <div id="text">
-        <p>Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</p>
-      </div>
+
+    <div class="page-vignette"></div>
+    <div class="page-noise"></div>
+
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+    <div
+        id="damage-layer"
+        class="damage-layer"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- =====================================================
+         TITLE SCREEN
+    ====================================================== -->
+
+    <section
+        id="title-screen"
+        class="title-screen"
+    >
+
+        <div class="title-background"></div>
+
+        <div class="title-overlay"></div>
+
+
+        <div class="title-shell">
+
+            <header class="title-header">
+
+                <div class="game-brand">
+
+                    <span class="brand-rune">
+                        DR
+                    </span>
+
+                    <div>
+                        <strong>
+                            Dragon Repeller
+                        </strong>
+
+                        <small>
+                            EMBERFALL
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="title-help-button"
+                    class="glass-button"
+                    type="button"
+                >
+                    How to Play
+                </button>
+
+            </header>
+
+
+            <div class="title-grid">
+
+                <div class="title-copy">
+
+                    <span class="title-kicker">
+                        THE KINGDOM IS BURNING
+                    </span>
+
+                    <h1>
+                        Rise.
+                        <span>Hunt.</span>
+                        Slay the dragon.
+                    </h1>
+
+                    <p>
+                        Explore Emberfall, grow stronger, upgrade
+                        your weapons, uncover hidden chambers, and
+                        become powerful enough to face the beast
+                        terrorizing the kingdom.
+                    </p>
+
+
+                    <div class="title-actions">
+
+                        <button
+                            id="new-game-button"
+                            class="primary-fantasy-button"
+                            type="button"
+                        >
+                            Begin Adventure
+                            <span>→</span>
+                        </button>
+
+
+                        <button
+                            id="continue-button"
+                            class="secondary-fantasy-button hidden"
+                            type="button"
+                        >
+                            Continue Journey
+                        </button>
+
+                    </div>
+
+
+                    <div class="title-records">
+
+                        <div>
+                            <span>
+                                Victories
+                            </span>
+
+                            <strong id="title-wins">
+                                0
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>
+                                Best Level
+                            </span>
+
+                            <strong id="title-best-level">
+                                1
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            <span>
+                                Best Fortune
+                            </span>
+
+                            <strong>
+                                <span id="title-best-gold">
+                                    50
+                                </span>
+                                G
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="title-hero">
+
+                    <div class="hero-aura"></div>
+
+                    <img
+                        src="images/hero-warrior.png"
+                        alt="Hero of Dragon Repeller"
+                    >
+
+                    <div class="hero-badge">
+
+                        <span>
+                            YOUR QUEST
+                        </span>
+
+                        <strong>
+                            Defeat the Ember Dragon
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIN GAME
+    ====================================================== -->
+
+    <main
+        id="game-screen"
+        class="game-screen hidden"
+    >
+
+        <!-- GAME HEADER -->
+
+        <header class="game-header">
+
+            <div class="game-header-inner">
+
+                <button
+                    id="home-button"
+                    class="game-brand compact-brand"
+                    type="button"
+                >
+
+                    <span class="brand-rune">
+                        DR
+                    </span>
+
+                    <div>
+                        <strong>
+                            Dragon Repeller
+                        </strong>
+
+                        <small>
+                            EMBERFALL
+                        </small>
+                    </div>
+
+                </button>
+
+
+                <div class="header-record">
+
+                    <span>
+                        Dragon Victories
+                    </span>
+
+                    <strong id="header-wins">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <button
+                        id="sound-button"
+                        class="icon-button"
+                        type="button"
+                        aria-label="Toggle sound"
+                    >
+                        ♪
+                    </button>
+
+
+                    <button
+                        id="help-button"
+                        class="icon-button"
+                        type="button"
+                        aria-label="How to play"
+                    >
+                        ?
+                    </button>
+
+
+                    <button
+                        id="new-run-button"
+                        class="new-run-button"
+                        type="button"
+                    >
+                        New Adventure
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- GAME BODY -->
+
+        <div class="game-layout">
+
+
+            <!-- =============================================
+                 MAIN COLUMN
+            ============================================== -->
+
+            <div class="main-game-column">
+
+
+                <!-- PLAYER HUD -->
+
+                <section class="player-hud">
+
+                    <div class="hud-level">
+
+                        <span>
+                            LEVEL
+                        </span>
+
+                        <strong id="level-text">
+                            1
+                        </strong>
+
+                    </div>
+
+
+                    <div class="hud-progress-group">
+
+                        <div class="hud-progress-label">
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <span id="xp-label">
+                                0 / 60 XP
+                            </span>
+
+                        </div>
+
+                        <div class="hud-progress-track">
+
+                            <div
+                                id="xp-bar"
+                                class="hud-progress-fill xp-fill"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hud-progress-group health-group">
+
+                        <div class="hud-progress-label">
+
+                            <span>
+                                Health
+                            </span>
+
+                            <span>
+                                <strong id="health-text">
+                                    100
+                                </strong>
+                                /
+                                <span id="max-health-text">
+                                    100
+                                </span>
+                            </span>
+
+                        </div>
+
+                        <div class="hud-progress-track">
+
+                            <div
+                                id="health-bar"
+                                class="hud-progress-fill health-fill"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hud-resource">
+
+                        <span>
+                            GOLD
+                        </span>
+
+                        <strong>
+                            <span id="gold-text">
+                                50
+                            </span>
+                            G
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SCENE -->
+
+                <section
+                    id="scene"
+                    class="scene-card"
+                >
+
+                    <img
+                        id="scene-image"
+                        class="scene-image"
+                        src="images/town-square.png"
+                        alt="Current game scene"
+                    >
+
+                    <div class="scene-shade"></div>
+
+                    <div class="scene-top">
+
+                        <div class="scene-location">
+
+                            <span id="scene-kicker">
+                                EMBERFALL
+                            </span>
+
+                            <h1 id="scene-title">
+                                Town Square
+                            </h1>
+
+                            <p id="scene-subtitle">
+                                The last safe place before the wilds.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            id="enemy-panel"
+                            class="enemy-panel hidden"
+                        >
+
+                            <div class="enemy-portrait">
+
+                                <img
+                                    id="enemy-art"
+                                    src="images/slime-monster.png"
+                                    alt="Current enemy"
+                                >
+
+                            </div>
+
+
+                            <div class="enemy-info">
+
+                                <span id="enemy-level">
+                                    LEVEL 1
+                                </span>
+
+                                <strong id="enemy-name">
+                                    Slime
+                                </strong>
+
+
+                                <div class="enemy-health-row">
+
+                                    <div class="enemy-health-track">
+
+                                        <div
+                                            id="enemy-health-bar"
+                                            class="enemy-health-fill"
+                                        ></div>
+
+                                    </div>
+
+
+                                    <span id="enemy-health-text">
+                                        50 / 50
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="scene-bottom">
+
+                        <div class="player-card">
+
+                            <img
+                                src="images/hero-warrior.png"
+                                alt="Your character"
+                            >
+
+                            <div>
+
+                                <span>
+                                    YOU
+                                </span>
+
+                                <strong id="player-weapon-display">
+                                    Traveler's Staff
+                                </strong>
+
+                                <small id="player-armor-display">
+                                    Worn Leather · 0 Defense
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="combat-status"
+                            class="combat-status hidden"
+                        >
+                            YOUR TURN
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- STORY PANEL -->
+
+                <section class="story-panel">
+
+                    <div class="story-heading">
+
+                        <span class="story-rune">
+                            ✦
+                        </span>
+
+                        <div>
+
+                            <span id="story-label">
+                                JOURNAL
+                            </span>
+
+                            <strong id="story-heading-text">
+                                A kingdom waits for a hero.
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <p id="story-text">
+                        The town of Emberfall lives beneath the
+                        shadow of a dragon. Prepare yourself before
+                        challenging the beast.
+                    </p>
+
+
+                    <div
+                        id="battle-log"
+                        class="battle-log"
+                    ></div>
+
+                </section>
+
+
+                <!-- ACTIONS -->
+
+                <section>
+
+                    <div class="action-heading">
+
+                        <span>
+                            CHOOSE YOUR ACTION
+                        </span>
+
+                        <small id="action-hint">
+                            Your journey is autosaved.
+                        </small>
+
+                    </div>
+
+
+                    <div
+                        id="actions"
+                        class="action-grid"
+                    ></div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =============================================
+                 SIDE COLUMN
+            ============================================== -->
+
+            <aside class="game-sidebar">
+
+
+                <!-- QUEST -->
+
+                <section class="sidebar-card quest-card">
+
+                    <span class="sidebar-label">
+                        MAIN QUEST
+                    </span>
+
+                    <h2>
+                        The Ember Dragon
+                    </h2>
+
+                    <p id="quest-text">
+                        Reach level 4 and forge a weapon strong
+                        enough to challenge the dragon.
+                    </p>
+
+
+                    <div class="threat-label">
+
+                        <span>
+                            Dragon readiness
+                        </span>
+
+                        <strong id="readiness-text">
+                            8%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="threat-track">
+
+                        <div
+                            id="readiness-bar"
+                            class="threat-fill"
+                        ></div>
+
+                    </div>
+
+
+                    <div
+                        id="dragon-status"
+                        class="dragon-status locked"
+                    >
+                        🔒 Dragon battle locked
+                    </div>
+
+                </section>
+
+
+                <!-- EQUIPMENT -->
+
+                <section class="sidebar-card">
+
+                    <div class="sidebar-card-heading">
+
+                        <span class="sidebar-label">
+                            EQUIPMENT
+                        </span>
+
+                        <span id="inventory-count">
+                            2 ITEMS
+                        </span>
+
+                    </div>
+
+
+                    <div id="inventory-list"></div>
+
+                </section>
+
+
+                <!-- DAILY REWARD -->
+
+                <section class="sidebar-card daily-card">
+
+                    <div class="daily-icon">
+                        ☀
+                    </div>
+
+                    <div>
+
+                        <span class="sidebar-label">
+                            DAILY TRIBUTE
+                        </span>
+
+                        <strong id="daily-title">
+                            Reward Available
+                        </strong>
+
+                        <p id="daily-text">
+                            Return each day for bonus gold
+                            and supplies.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACHIEVEMENTS -->
+
+                <section class="sidebar-card">
+
+                    <div class="sidebar-card-heading">
+
+                        <span class="sidebar-label">
+                            ACHIEVEMENTS
+                        </span>
+
+                        <span id="achievement-count">
+                            0 / 8
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="achievement-list"
+                        class="achievement-list"
+                    ></div>
+
+                </section>
+
+
+                <!-- RECORDS -->
+
+                <section class="sidebar-card records-card">
+
+                    <span class="sidebar-label">
+                        LEGACY
+                    </span>
+
+
+                    <div class="record-grid">
+
+                        <div>
+                            <span>
+                                Wins
+                            </span>
+
+                            <strong id="record-wins">
+                                0
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>
+                                Monsters
+                            </span>
+
+                            <strong id="record-monsters">
+                                0
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>
+                                Best Level
+                            </span>
+
+                            <strong id="record-level">
+                                1
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>
+                                Best Gold
+                            </span>
+
+                            <strong id="record-gold">
+                                50
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         HELP MODAL
+    ====================================================== -->
+
+    <div
+        id="help-modal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-backdrop"></div>
+
+
+        <div
+            class="modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="help-title"
+        >
+
+            <button
+                id="close-help-button"
+                class="modal-close"
+                type="button"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <span class="section-label">
+                ADVENTURER'S GUIDE
+            </span>
+
+            <h2 id="help-title">
+                How to survive Emberfall
+            </h2>
+
+
+            <div class="guide-grid">
+
+                <article>
+
+                    <span>
+                        01
+                    </span>
+
+                    <strong>
+                        Explore
+                    </strong>
+
+                    <p>
+                        Visit the store and cave to gather
+                        equipment, gold, and experience.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        02
+                    </span>
+
+                    <strong>
+                        Grow stronger
+                    </strong>
+
+                    <p>
+                        Defeat monsters to gain XP. Leveling
+                        increases your maximum health.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        03
+                    </span>
+
+                    <strong>
+                        Upgrade
+                    </strong>
+
+                    <p>
+                        Better weapons deal more damage. Armor
+                        reduces incoming monster attacks.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        04
+                    </span>
+
+                    <strong>
+                        Slay the dragon
+                    </strong>
+
+                    <p>
+                        Reach level 4 and obtain a worthy weapon
+                        before entering the final battle.
+                    </p>
+
+                </article>
+
+            </div>
+
+
+            <div class="combat-guide">
+
+                <h3>
+                    Combat moves
+                </h3>
+
+                <p>
+                    <strong>Attack</strong> is dependable.
+                    <strong>Power Strike</strong> deals heavier
+                    damage but may miss.
+                    <strong>Dodge</strong> attempts to evade and
+                    counter.
+                    <strong>Potion</strong> heals you but gives
+                    the enemy a turn.
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
-    <script src="./script.js"></script>
+
+
+    <script src="script.js?v=4.0.0"></script>
+
 </body>
 </html>
