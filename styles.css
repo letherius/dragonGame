@@ -248,6 +248,8 @@ img {
 
     place-items: center;
 
+    flex-shrink: 0;
+
     border:
         1px solid var(--line-gold);
 
@@ -299,6 +301,41 @@ img {
     letter-spacing: 3px;
 }
 
+
+/* CREATOR CREDIT INSIDE TITLE BRAND */
+
+.brand-credit {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    line-height: 1.4;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+.brand-credit b {
+    margin-left: 3px;
+
+    color: #ffffff;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+}
+
 .glass-button {
     padding:
         10px 15px;
@@ -322,8 +359,6 @@ img {
 .title-grid {
     min-height:
         calc(100vh - 90px);
-
-    padding-bottom: 62px;
 
     display: grid;
 
@@ -501,61 +536,6 @@ img {
 
     font-size: 16px;
 }
-
-
-/* =========================================================
-   TITLE FOOTER
-========================================================= */
-
-.title-footer {
-    position: absolute;
-
-    left: 50%;
-    bottom: 18px;
-
-    transform: translateX(-50%);
-
-    width: min(700px, calc(100% - 40px));
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    padding-top: 15px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.07);
-
-    color:
-        rgba(184, 177, 165, 0.62);
-
-    font-size: 8px;
-
-    letter-spacing: 0.5px;
-
-    text-align: center;
-}
-
-.title-footer strong {
-    margin-left: 3px;
-
-    color: var(--gold-light);
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-weight: 700;
-}
-
-.footer-divider {
-    color: var(--gold-dark);
-}
-
 
 .title-hero {
     position: relative;
@@ -2389,14 +2369,12 @@ img {
     }
 
     .title-header {
-        min-height: 78px;
+        min-height: 88px;
     }
 
     .title-grid {
         min-height:
-            calc(100vh - 78px);
-
-        padding-bottom: 80px;
+            calc(100vh - 88px);
     }
 
     .title-copy h1 {
@@ -2411,15 +2389,10 @@ img {
         right: 0;
     }
 
-    .title-footer {
-        flex-wrap: wrap;
+    .brand-credit {
+        font-size: 5.5px;
 
-        row-gap: 4px;
-
-        padding:
-            13px 8px 0;
-
-        font-size: 7px;
+        letter-spacing: 0.7px;
     }
 
     .header-record {
@@ -2511,18 +2484,10 @@ img {
         height: 470px;
     }
 
-    .title-footer {
-        gap: 6px;
+    .brand-credit {
+        white-space: normal;
 
-        bottom: 10px;
-    }
-
-    .footer-divider {
-        display: none;
-    }
-
-    .title-footer > span {
-        width: 100%;
+        max-width: 190px;
     }
 
     .scene-card {
