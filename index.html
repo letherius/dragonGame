@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
@@ -35,7 +36,7 @@
 
     <link
         rel="stylesheet"
-        href="styles.css?v=4.3.0"
+        href="styles.css?v=4.4.0"
     >
 </head>
 
@@ -82,7 +83,8 @@
                         DR
                     </span>
 
-                    <div>
+                    <div class="brand-text">
+
                         <strong>
                             Dragon Repeller
                         </strong>
@@ -95,6 +97,7 @@
                             CREATED &amp; DEVELOPED BY
                             <b>Letherius Miller</b>
                         </span>
+
                     </div>
 
                 </div>
@@ -237,8 +240,6 @@
         class="game-screen hidden"
     >
 
-        <!-- GAME HEADER -->
-
         <header class="game-header">
 
             <div class="game-header-inner">
@@ -254,6 +255,7 @@
                     </span>
 
                     <div>
+
                         <strong>
                             Dragon Repeller
                         </strong>
@@ -261,6 +263,7 @@
                         <small>
                             EMBERFALL
                         </small>
+
                     </div>
 
                 </button>
@@ -316,13 +319,7 @@
         </header>
 
 
-        <!-- GAME BODY -->
-
         <div class="game-layout">
-
-            <!-- =============================================
-                 MAIN COLUMN
-            ============================================== -->
 
             <div class="main-game-column">
 
@@ -420,7 +417,7 @@
                 </section>
 
 
-                <!-- SCENE -->
+                <!-- MAIN SCENE -->
 
                 <section
                     id="scene"
@@ -435,6 +432,7 @@
                     >
 
                     <div class="scene-shade"></div>
+
 
                     <div class="scene-top">
 
@@ -493,7 +491,6 @@
 
                                     </div>
 
-
                                     <span id="enemy-health-text">
                                         50 / 50
                                     </span>
@@ -547,7 +544,7 @@
                 </section>
 
 
-                <!-- STORY PANEL -->
+                <!-- STORY -->
 
                 <section class="story-panel">
 
@@ -614,14 +611,10 @@
             </div>
 
 
-            <!-- =============================================
-                 SIDE COLUMN
-            ============================================== -->
+            <!-- SIDEBAR -->
 
             <aside class="game-sidebar">
 
-
-                <!-- QUEST -->
 
                 <section class="sidebar-card quest-card">
 
@@ -672,8 +665,6 @@
                 </section>
 
 
-                <!-- EQUIPMENT -->
-
                 <section class="sidebar-card">
 
                     <div class="sidebar-card-heading">
@@ -688,13 +679,10 @@
 
                     </div>
 
-
                     <div id="inventory-list"></div>
 
                 </section>
 
-
-                <!-- DAILY REWARD -->
 
                 <section class="sidebar-card daily-card">
 
@@ -722,8 +710,6 @@
                 </section>
 
 
-                <!-- ACHIEVEMENTS -->
-
                 <section class="sidebar-card">
 
                     <div class="sidebar-card-heading">
@@ -738,7 +724,6 @@
 
                     </div>
 
-
                     <div
                         id="achievement-list"
                         class="achievement-list"
@@ -746,8 +731,6 @@
 
                 </section>
 
-
-                <!-- RECORDS -->
 
                 <section class="sidebar-card records-card">
 
@@ -950,4 +933,5 @@
     <script src="script.js?v=4.1.0"></script>
 
 </body>
+
 </html>
