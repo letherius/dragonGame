@@ -217,7 +217,7 @@ img {
 }
 
 .title-header {
-    min-height: 90px;
+    min-height: 96px;
 
     display: flex;
 
@@ -230,6 +230,11 @@ img {
         1px solid var(--line);
 }
 
+
+/* =========================================================
+   BRAND
+========================================================= */
+
 .game-brand {
     display: flex;
 
@@ -238,6 +243,14 @@ img {
     gap: 12px;
 
     color: var(--cream);
+}
+
+.brand-text {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
 }
 
 .brand-rune {
@@ -302,58 +315,68 @@ img {
 
     font-weight: 800;
 
+    line-height: 1;
+
     letter-spacing: 3px;
 }
 
 
 /* =========================================================
    CREATOR CREDIT
-   MATCHES EMBERFALL SIZE AND STYLE
+
+   Intentionally smaller than EMBERFALL.
 ========================================================= */
 
-.brand-credit {
+.title-brand .brand-credit {
     display: block;
 
-    margin-top: 4px;
+    margin-top: 5px;
 
-    color: var(--muted);
+    color: rgba(
+        184,
+        177,
+        165,
+        0.72
+    );
 
     font-family:
         "Inter",
         sans-serif;
 
-    font-size: 8px;
+    font-size: 6px !important;
 
     font-weight: 800;
 
-    line-height: 1.3;
+    line-height: 1;
 
-    letter-spacing: 3px;
+    letter-spacing: 1.4px;
 
     text-transform: uppercase;
 
     white-space: nowrap;
 }
 
-.brand-credit b {
+.title-brand .brand-credit b {
     color: #ffffff;
 
     font-family:
         "Inter",
         sans-serif;
 
-    font-size: 8px;
+    font-size: 6px !important;
 
     font-weight: 800;
 
-    letter-spacing: 3px;
+    line-height: 1;
 
-    text-transform: uppercase;
+    letter-spacing: 1.4px;
+
+    text-transform: none;
 }
 
 
 /* =========================================================
-   TITLE BUTTON
+   TITLE HELP BUTTON
 ========================================================= */
 
 .glass-button {
@@ -376,9 +399,14 @@ img {
     cursor: pointer;
 }
 
+
+/* =========================================================
+   TITLE CONTENT
+========================================================= */
+
 .title-grid {
     min-height:
-        calc(100vh - 90px);
+        calc(100vh - 96px);
 
     display: grid;
 
@@ -507,6 +535,11 @@ img {
     background:
         rgba(244, 189, 89, 0.08);
 }
+
+
+/* =========================================================
+   TITLE RECORDS
+========================================================= */
 
 .title-records {
     display: flex;
@@ -2394,12 +2427,12 @@ img {
     }
 
     .title-header {
-        min-height: 90px;
+        min-height: 96px;
     }
 
     .title-grid {
         min-height:
-            calc(100vh - 90px);
+            calc(100vh - 96px);
     }
 
     .title-copy h1 {
@@ -2412,6 +2445,13 @@ img {
 
     .hero-badge {
         right: 0;
+    }
+
+    .title-brand .brand-credit,
+    .title-brand .brand-credit b {
+        font-size: 5.5px !important;
+
+        letter-spacing: 1px;
     }
 
     .header-record {
@@ -2503,8 +2543,8 @@ img {
         height: 470px;
     }
 
-    .brand-credit {
-        max-width: 220px;
+    .title-brand .brand-credit {
+        max-width: 190px;
 
         white-space: normal;
     }
